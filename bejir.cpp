@@ -1,51 +1,35 @@
-#include <iostream>
-#include <cmath>
-#include <tuple>
-#include <vector>
 
-using namespace std;
+#include "bejir.h"
 
-class Dot{
-    private:
-        double x;
-        double y;
-    public:
-        Dot(double x, double y){
-            this->x = x;
-            this->y = y;
-        };
-        void print(){
-            cout << "[" << x << "," << y << "]";
-        }
-};
+bejir::bejir(int maxIterasi) {
+    this->garisBezier = Line();
+    this->max_iterasi = maxIterasi;
+}
 
-class Line{
-    private:
-        vector<Dot> dotlist;
-        int neff;
-    public:
-        Line(){
-            neff = 0;
-        }
-        
-        void show(){
-            for (int i = 0; i < neff; i++) {
-                dotlist[i].print();
-            };
-        }
+int bejir::getMaxIterasi() const {
+    return this->max_iterasi;
+}
 
-        Line& operator+=(const Dot& titik){
-            this->dotlist.push_back(titik);
-            neff++;
-            return *this;
-        }       
+Dot bejir::TitikTengah(Dot point1, Dot point2) {
+    return {(point1.getX() + point2.getX()) / 2,(point1.getY() + point2.getY()) / 2 };
+}
 
-};
+void bejir::AddBezierCurve(Dot point1, Dot point2, Dot point3, int iterasi) {
+    if (iterasi < getMaxIterasi()){
+        Dot titik_tengah1 = TitikTengah(point1,point2);
+        Dot titik_tengah2 = TitikTengah(point2,point3);
+        Dot titik_tengah3 = TitikTengah(titik_tengah1, titik_tengah2);
 
-int main() {
-    Line garis;
-
-    garis += Dot(0,0);
-    garis += Dot(1,1);
-    garis.show();
+        AddBezierCurve(point1,titik_tengah1,titik_tengah3,iterasi+1);
+        garisBezier += titik_tengah3;
+        AddBezierCurve(titik_tengah3, titik_tengah2, point3, iterasi+1);
     }
+}
+
+void bejir::addLast(Dot titik) {
+    garisBezier += titik;
+}
+
+void bejir::print() {
+    garisBezier.show();
+}
