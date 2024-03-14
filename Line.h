@@ -22,6 +22,10 @@ public:
     void show();
     // Menambahkan titik baru ke list of titik
     Line& operator+=(const Dot& titik);
+    // Mengembalikan jumblah titik dalam line
+    int length() const;
+    // Memungkinkan untuk mengecek titik melalui operator []
+    Dot& operator[](const int&);
 };
 
 #endif //KURVA_BEZIER_LINE_H

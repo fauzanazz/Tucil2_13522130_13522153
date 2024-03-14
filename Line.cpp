@@ -14,9 +14,19 @@ void Line::show() {
     };
 }
 
-Line& Line::operator+=(const Dot &titik) {
-    this->dotlist.push_back(titik);
-    neff++;
+Line& Line::operator+=(const Dot& titik){
+    if (neff == 0){
+        this->dotlist.push_back(titik);
+        neff++;
+    }   
+    else if (dotlist[neff-1] != titik){
+        this->dotlist.push_back(titik);
+        neff++;
+    }
     return *this;
+}
+
+int Line::length() const{
+    return neff;
 }
 

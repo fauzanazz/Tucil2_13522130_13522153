@@ -27,6 +27,9 @@ public:
     // Menambahkan titik ke kurva bezier secara rekursive
     void AddBezierCurve(Dot point1, Dot Point2, Dot Point3, int iterasi);
 
+    // Brute force bezier
+    void BruteForceBezier(Dot point1, Dot point2, Dot point3);
+
     // Menambahkan satu titik ke kurva bezier paling terakhir
     void addLast(Dot titik);
 
