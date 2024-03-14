@@ -34,7 +34,9 @@ public:
     friend Dot operator*(const Dot&, const float);
     friend Dot operator+(const Dot&, const Dot&);
 
+    void setX(double setx);
 
+    void setY(double sety);
 };
 
 

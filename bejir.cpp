@@ -1,4 +1,4 @@
-
+#include <valarray>
 #include "bejir.h"
 #include <cmath>
 #include <iostream>
@@ -14,6 +14,30 @@ int bejir::getMaxIterasi() const {
 
 Dot bejir::TitikTengah(Dot point1, Dot point2) {
     return {(point1.getX() + point2.getX()) / 2,(point1.getY() + point2.getY()) / 2 };
+}
+
+void bejir::addLast(Dot titik) {
+    garisBezier += titik;
+}
+
+void bejir::print() {
+    garisBezier.show();
+}
+
+
+Dot bejir::calculateBezierPoint(double t, const std::vector<Dot> &points) {
+    Dot result = Dot(0,0);
+    size_t n = points.size() - 1;
+    for (int i = 0; i <= n; i++) {
+        // Calculate the binomial coefficient
+        double binCoeff = factorial(n) / (factorial(i) * factorial(n - i));
+        // Calculate the Bernstein polynomial
+        double bernsteinPoly = binCoeff * std::pow(t, i) * std::pow(1 - t, n - i);
+        // Add the term to the result
+        result.setX(result.getX() + bernsteinPoly * points[i].getX());
+        result.setY(result.getY() + bernsteinPoly * points[i].getY());
+    }
+    return result;
 }
 
 void bejir::AddBezierCurve(Dot point1, Dot point2, Dot point3, int iterasi) {
@@ -42,6 +66,10 @@ void bejir::addLast(Dot titik) {
     garisBezier += titik;
 }
 
-void bejir::print() {
-    garisBezier.show();
+double bejir::factorial(size_t n) {
+    double result = 1;
+    for (int i = 1; i <= n; i++) {
+        result *= i;
+    }
+    return result;
 }

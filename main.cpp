@@ -24,5 +24,17 @@ int main() {
     std::cout << "BRUTE RESULT" << std::endl;
     brute.print();
 
+    std::vector<Dot> points = {
+            Dot(0,0),
+            Dot(1,2),
+            Dot(3,1),
+            Dot(4,3)
+    };
+
+    for (double t = 0; t <= 1.01; t += 0.01) {
+        Dot point = bejir::calculateBezierPoint(t, points);
+        std::cout << "Point at t=" << t << ": (" << point.getX() << ", " << point.getY() << ")\n";
+    }
+
     return 0;
 }

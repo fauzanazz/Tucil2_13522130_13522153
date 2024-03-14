@@ -46,3 +46,11 @@ Dot operator*(const Dot& titik, const float kali){
 Dot operator+(const Dot& a, const Dot& b){
     return Dot(a.x + b.x, a.y + b.y);
 }
+
+void Dot::setY(double sety) {
+    this->y = sety;
+}
+
+void Dot::setX(double setx) {
+    this->x = setx;
+}
