@@ -24,6 +24,7 @@ public:
     Line& operator+=(const Dot& titik);
     // Mengembalikan jumblah titik dalam line
     int length() const;
+
     // Memungkinkan untuk mengecek titik melalui operator []
     Dot& operator[](const int&);
 };

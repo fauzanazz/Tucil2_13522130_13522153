@@ -1,7 +1,6 @@
 #include <valarray>
 #include "bejir.h"
 #include <cmath>
-#include <iostream>
 
 bejir::bejir(int maxIterasi) {
     this->garisBezier = Line();
@@ -53,17 +52,12 @@ void bejir::AddBezierCurve(Dot point1, Dot point2, Dot point3, int iterasi) {
 }
 
 void bejir::BruteForceBezier(Dot point1, Dot point2, Dot point3){
-    
-    for (float i = 0; i <= max_iterasi; i++){
-        float t = i/max_iterasi;
-        Dot titik = (point1*pow(1-t,2)) + (point2*(1-t)*t) + (point3*pow(t,2));
-        this->garisBezier += titik;
+
+    for (int i = 0; i <= max_iterasi; i++){
+        float t =  (float) i / (float) max_iterasi;
+        this->garisBezier += (point1 * pow(1-t,2)) + (point2*(1-t)*t) + (point3 * pow(t,2));
     }
 
-}
-
-void bejir::addLast(Dot titik) {
-    garisBezier += titik;
 }
 
 double bejir::factorial(size_t n) {

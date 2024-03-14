@@ -26,12 +26,12 @@ public:
     // Menampilkan dot ke layar
     void print() const;
 
-    bool operator==(const Dot&);
-    bool operator!=(const Dot&);
+    bool operator==(const Dot&) const;
+    bool operator!=(const Dot&) const;
 
     // Operator kali
-    friend Dot operator*(const float, const Dot&);
-    friend Dot operator*(const Dot&, const float);
+    friend Dot operator*(double , const Dot&);
+    friend Dot operator*(const Dot&, double );
     friend Dot operator+(const Dot&, const Dot&);
 
     void setX(double setx);

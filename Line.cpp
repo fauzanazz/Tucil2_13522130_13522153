@@ -30,3 +30,6 @@ int Line::length() const{
     return neff;
 }
 
+Dot &Line::operator[](const int &s) {
+    return dotlist[s];
+}
