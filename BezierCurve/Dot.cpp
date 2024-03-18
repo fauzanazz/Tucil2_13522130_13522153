@@ -22,12 +22,7 @@ double Dot::getY() const {
 }
 
 bool Dot::operator==(const Dot& target) const{
-    if (this->x == target.x && this->y == target.y){
-        return true;
-    }
-    else{
-        return false;
-    }
+    return this->x == target.x && this->y == target.y;
 }
 
 bool Dot::operator!=(const Dot& target) const{

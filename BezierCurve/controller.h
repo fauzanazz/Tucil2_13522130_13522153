@@ -4,6 +4,7 @@
 
 #include <QDialog>
 #include "mainwindow.h"
+#include "Line.h"
 
 namespace Ui {
 class Controller;
@@ -21,9 +22,14 @@ signals:
     void closed();
 
 private slots:
-    void on_pushButton_2_clicked();
     void on_pushButton_4_clicked();
-    void solveBezierSlot(MainWindow* window);
+    void solveBezierDnC(MainWindow* window);
+    void solveBezierBrute(MainWindow* window);
+    void on_textEdit_textChanged();
+    void transformDot();
+    void on_pushButton_clicked();
+
+    void on_lineEdit_textChanged(const QString &arg1);
 
 protected:
     void closeEvent(QCloseEvent *event) override;
@@ -31,6 +37,8 @@ protected:
 private:
     Ui::Controller *ui;
     MainWindow *panel;
+    Line GarisControl;
+    int iteration = 0;
 };
 
 #endif // CONTROLLER_H

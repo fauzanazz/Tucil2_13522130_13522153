@@ -1,4 +1,3 @@
-#include <valarray>
 #include "bejir.h"
 #include <cmath>
 
@@ -39,6 +38,27 @@ Dot bejir::calculateBezierPoint(double t, const std::vector<Dot> &points) {
     return result;
 }
 
+Line bejir::calculateBezierPoint(const std::vector<Dot> &points, int iter) {
+    Line bezier;
+    Dot result = Dot(0,0);
+    size_t n = points.size() - 1;
+    for (int j = 0; j < iter; ++j){
+        result = {0,0};
+        double t = (double) j / (double) iter;
+        for (int i = 0; i <= n; i++) {
+            // Calculate the binomial coefficient
+            double binCoeff = factorial(n) / (factorial(i) * factorial(n - i));
+            // Calculate the Bernstein polynomial
+            double bernsteinPoly = binCoeff * std::pow(t, i) * std::pow(1 - t, n - i);
+            // Add the term to the result
+            result.setX(result.getX() + bernsteinPoly * points[i].getX());
+            result.setY(result.getY() + bernsteinPoly * points[i].getY());
+        }
+        bezier += result;
+    }
+    return bezier;
+}
+
 void bejir::AddBezierCurve(Dot point1, Dot point2, Dot point3, int iterasi) {
     if (iterasi < getMaxIterasi()){
         Dot titik_tengah1 = TitikTengah(point1,point2);
@@ -66,4 +86,12 @@ double bejir::factorial(size_t n) {
         result *= i;
     }
     return result;
+}
+
+Line bejir::getGarisBezier() const {
+    return garisBezier;
+}
+
+void bejir::setGarisBezier(Line set) {
+    this->garisBezier = set;
 }

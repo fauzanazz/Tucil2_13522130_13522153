@@ -51,6 +51,10 @@ std::vector<Dot> Line::getVector() const{
     return dotlist;
 }
 
+std::vector<Dot>* Line::changeVector(){
+    return &dotlist;
+}
+
 Dot Line::interpolate(Dot start, Dot end, double t) {
     double x = start.getX() + t * (end.getX() - start.getX());
     double y = start.getY() + t * (end.getY() - start.getY());
@@ -61,3 +65,43 @@ void Line::clear(){
     neff = 0;
     dotlist.clear();
 }
+
+int Line::maxX(){
+    int max = dotlist[0].getX();
+    for (int i = 1; i < neff; i++){
+        if (dotlist[i].getX() > max){
+            max = dotlist[i].getX();
+        }
+    }
+    return max;
+}
+
+int Line::maxY(){
+    int max = dotlist[0].getY();
+    for (int i = 1; i < neff; i++){
+        if (dotlist[i].getY() > max){
+            max = dotlist[i].getY();
+        }
+    }
+    return max;
+}
+
+int Line::minX(){
+    int min = dotlist[0].getX();
+    for (int i = 1; i < neff; i++){
+        if (dotlist[i].getX() < min){
+            min = dotlist[i].getX();
+        }
+    }
+    return min;
+}
+
+int Line::minY(){
+    int min = dotlist[0].getY();
+    for (int i = 1; i < neff; i++){
+        if (dotlist[i].getY() < min){
+            min = dotlist[i].getY();
+        }
+    }
+    return min;
+}   

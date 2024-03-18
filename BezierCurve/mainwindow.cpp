@@ -5,23 +5,15 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Result)
-    , bezierCurve()
     , t(0)
     , brutegweh(0)
+    , garis()
 {
     ui->setupUi(this);
 
-    garis += Dot(300,500);
-    garis += Dot(500,200);
-    garis += Dot(700,300);
-
-    brutegweh = bejir(0);
-    Line solve = brutegweh.calculateBezierPoint(garis.getVector(), 100);
-    brutegweh.setGarisBezier(solve);
-
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &MainWindow::drawNextSegment);
-    timer->start(1000 / 30);
+    timer->start(1000 / 60);
 }
 
 MainWindow::~MainWindow()
@@ -30,9 +22,23 @@ MainWindow::~MainWindow()
 }
 
 
-void MainWindow::addBezierCurve(Line curve)
+void MainWindow::addBezierCurve(Line curve, bool brute, int iteration)
 {
-    bezierCurve = curve;
+    garis = curve;
+    isBrute = brute;
+    iter = iteration;
+
+    if (isBrute){
+        Line solve = brutegweh.calculateBezierPoint(garis.getVector(),iter);
+        brutegweh.setGarisBezier(solve);
+        solve.show();
+    } else {
+        Line solve = brutegweh.calculateBezierPoint(garis.getVector(),iter);
+        brutegweh.setGarisBezier(solve);
+        solve.show();
+    }
+
+
     update();
 }
 
@@ -40,14 +46,19 @@ void MainWindow::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
-    painter.setPen(QPen(Qt::green, 2));
+
 
     Line resultInterpolated;
     Line temp;
 
     Line solve = brutegweh.getGarisBezier();
-    for (int i = 0; i < brutegweh.getGarisBezier().length() - 1; ++i){
+    for (int i = 0; i < solve.length() ; ++i){
+        painter.setPen(QPen(Qt::green, 2));
         painter.drawEllipse(solve[i].getX(),solve[i].getY(),3,3);
+        if (i < brutegweh.getGarisBezier().length() - 1){
+            painter.setPen(QPen(Qt::darkGreen, 1));
+            painter.drawLine(solve[i].getX(), solve[i].getY(), solve[i+1].getX(),solve[i+1].getY());
+        }
     }
 
     Line temp_garis = garis;
@@ -57,6 +68,7 @@ void MainWindow::paintEvent(QPaintEvent *)
     }
 
     painter.setPen(QPen(Qt::red, 3));
+
     // Interpolate garis
     while (temp_garis.length() != 2){
         temp.clear();

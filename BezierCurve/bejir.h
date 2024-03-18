@@ -12,15 +12,19 @@ private:
     Line garisBezier;
     int max_iterasi;
 public:
-    // Setter
+    // Constructor
     // Init class bejir
     bejir(int maxIterasi);
 
+    // Setter
+    // Menubah garis bezier
     void setGarisBezier(Line set);
 
     // Getter
     // Mengembalikan max iterasi
     int getMaxIterasi() const;
+    // Mengembalikan garis bezier
+    Line getGarisBezier() const;
 
     // Menerima dua buah titik dan mengembailkan titik tengah;
     static Dot TitikTengah(Dot point1, Dot point2);
@@ -41,9 +45,10 @@ public:
     // Menampilkan garis dari kurva beizer
     void print();
 
+    // Fungsi tambahan
+    // Menghitung faktorial
     static double factorial(std::size_t n);
 
-    Line getGarisBezier() const;
 };
 
 #endif //KURVA_BEZIER_BEJIR_H

@@ -1,6 +1,7 @@
 #include "Dot.h"
 #include "Line.h"
 #include "bejir.h"
+
 #include <iostream>
 
 int main() {

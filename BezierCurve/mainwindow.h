@@ -20,7 +20,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    void addBezierCurve(Line curve);
+    void addBezierCurve(Line curve, bool brute,int iteration);
     void drawNextSegment();
 
 
@@ -29,9 +29,12 @@ protected:
 
 private:
     Ui::Result *ui;
-    Line bezierCurve;
+    bool isBrute = false;
+    int iter = 0;
+
     double t; // Parameter for the Bezier curve
     QTimer *timer; // Timer for the animation
+
     Line garis;
     bejir brutegweh;
 };
