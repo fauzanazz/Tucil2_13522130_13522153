@@ -1,9 +1,0 @@
-C:/Users/Ojan/Documents/GitHub/Tucil2_13522130_13522153/build-BezierCurve-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/CMakeFiles/BezierCurve.dir
-C:/Users/Ojan/Documents/GitHub/Tucil2_13522130_13522153/build-BezierCurve-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/CMakeFiles/edit_cache.dir
-C:/Users/Ojan/Documents/GitHub/Tucil2_13522130_13522153/build-BezierCurve-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/CMakeFiles/rebuild_cache.dir
-C:/Users/Ojan/Documents/GitHub/Tucil2_13522130_13522153/build-BezierCurve-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/CMakeFiles/list_install_components.dir
-C:/Users/Ojan/Documents/GitHub/Tucil2_13522130_13522153/build-BezierCurve-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/CMakeFiles/install.dir
-C:/Users/Ojan/Documents/GitHub/Tucil2_13522130_13522153/build-BezierCurve-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/CMakeFiles/install/local.dir
-C:/Users/Ojan/Documents/GitHub/Tucil2_13522130_13522153/build-BezierCurve-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/CMakeFiles/install/strip.dir
-C:/Users/Ojan/Documents/GitHub/Tucil2_13522130_13522153/build-BezierCurve-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/CMakeFiles/BezierCurve_autogen_timestamp_deps.dir
-C:/Users/Ojan/Documents/GitHub/Tucil2_13522130_13522153/build-BezierCurve-Desktop_Qt_6_6_1_MinGW_64_bit-Debug/CMakeFiles/BezierCurve_autogen.dir

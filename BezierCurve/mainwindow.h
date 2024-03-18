@@ -6,6 +6,7 @@
 #include <QPainter>
 #include <QTimer>
 #include <QWidget>
+#include <QElapsedTimer>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -34,9 +35,12 @@ private:
 
     double t; // Parameter for the Bezier curve
     QTimer *timer; // Timer for the animation
+    QElapsedTimer exec; //  Timer for exec time
 
     Line garis;
     bejir brutegweh;
+
+    int iterAnim = 0;
 };
 
 #endif // MAINWINDOW_H

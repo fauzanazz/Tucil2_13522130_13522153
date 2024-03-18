@@ -9,14 +9,9 @@ Line::Line() {
 }
 
 void Line::show() {
-    std::cout << "[";
     for (int i = 0; i < neff; i++) {
         dotlist[i].print();
-        if (i < neff-1){
-            std::cout << ",";
-        }
     };
-    std::cout << "]";
 }
 
 Line& Line::operator+=(const Dot& titik){

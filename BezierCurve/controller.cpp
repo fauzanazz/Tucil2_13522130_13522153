@@ -35,12 +35,18 @@ void Controller::on_pushButton_4_clicked()
 
 void Controller::solveBezierDnC(MainWindow* window)
 {
+    if(GarisControl.isEmpty()){
+        return;
+    }
     transformDot();
     window->addBezierCurve(GarisControl, false, iteration);
 }
 
 void Controller::solveBezierBrute(MainWindow* window)
 {
+    if(GarisControl.isEmpty()){
+        return;
+    }
     transformDot();
     window->addBezierCurve(GarisControl, true, iteration);
 }

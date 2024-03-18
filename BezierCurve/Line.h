@@ -42,8 +42,10 @@ public:
     // Getter
     // Mengembalikan titik dalam list of titik
     std::vector<Dot> getVector() const;
-    // Mengembalikan jumblah titik dalam line
+    // Mengembalikan jumlah titik dalam line
     int length() const;
+    // Mengembalikan true jika Garis kosong
+    bool isEmpty() const;
 
     // Fungsi tambahan
     // Interpolasi  titik pada garis

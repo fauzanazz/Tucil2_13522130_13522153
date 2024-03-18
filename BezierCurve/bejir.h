@@ -35,6 +35,11 @@ public:
     // Brute force bezier
     void BruteForceBezier(Dot point1, Dot point2, Dot point3);
 
+    // Bezier dengan algoritma garis tengah
+    void divconNbezier(Line);
+    std::vector<Dot> bezier(const std::vector<Dot>& controlPoints, float t);
+    Line DnCBezierPoint(const std::vector<Dot>& controlPoints, int numIterations);
+
     // Brute force n control
     static Dot calculateBezierPoint(double t, const std::vector<Dot> &points);
     static Line calculateBezierPoint(const std::vector<Dot> &points, int iter);

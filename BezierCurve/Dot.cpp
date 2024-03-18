@@ -4,6 +4,8 @@
 #include "Dot.h"
 #include <iostream>
 
+Dot::Dot(){};
+
 Dot::Dot(double x, double y) {
     this->x = x;
     this->y = y;

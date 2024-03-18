@@ -2,6 +2,7 @@
 #include "./ui_mainwindow.h"
 #include <QPainterPath>
 
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Result)
@@ -27,17 +28,23 @@ void MainWindow::addBezierCurve(Line curve, bool brute, int iteration)
     garis = curve;
     isBrute = brute;
     iter = iteration;
-
+    exec.start();
+    qint64 timeTaken;
     if (isBrute){
+        // Hitung waktu eksekusi
         Line solve = brutegweh.calculateBezierPoint(garis.getVector(),iter);
+        solve += garis[garis.length()-1];
         brutegweh.setGarisBezier(solve);
-        solve.show();
+        timeTaken = exec.elapsed();
     } else {
-        Line solve = brutegweh.calculateBezierPoint(garis.getVector(),iter);
+        Line solve = brutegweh.DnCBezierPoint(garis.getVector(),iter);
         brutegweh.setGarisBezier(solve);
-        solve.show();
+        timeTaken = exec.elapsed();
     }
-
+    QString timeString = QString::number(timeTaken);
+    // Set the window title to display the time taken in QT
+    setWindowTitle("Time taken: " + timeString + " miliseconds");
+    
 
     update();
 }
@@ -96,6 +103,7 @@ void MainWindow::drawNextSegment()
     t += 0.01;
     if (t > 1) {
         t = 0;
+        iterAnim++;
     }
     update();
 }

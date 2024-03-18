@@ -41,29 +41,51 @@ void bejir::divconNbezier(Line garis){
             RMP = TitikTengah(CP,RP);
             CMP = TitikTengah(LMP,RMP);
 
-            //khusus untuk garis paling kiri
-            if (i == 0) {
-                temp.AddBezierCurve(LP,LMP,CMP,1);
-                result += LP;
-            }
-            else{
-                temp.AddBezierCurve(prev_CMP,LMP,CMP,1);
-                result += prev_CMP;
-            }
+            temp.AddBezierCurve(LP,LMP,CMP,1);
+            result += LP;
             result += temp.garisBezier;
             // pindahkan CMP sekarang ke prevCMP untuk iterasi selanjutnya
             prev_CMP = CMP;
         }
-        //paling kanan
+
+        // Handle the last segment separately
         bejir temp(iter);
-        temp.AddBezierCurve(CMP,RMP,RP,1);
-        result += CMP;
+        temp.AddBezierCurve(prev_CMP,CMP,RMP,1);
+        result += prev_CMP;
         result += temp.garisBezier;
         result += RP;
 
-        this->garisBezier = result;
     }
 };
+
+std::vector<Dot> bejir::bezier(const std::vector<Dot>& controlPoints, float t) {
+    if (controlPoints.size() == 1) {
+        return controlPoints;
+    }
+
+    std::vector<Dot> newPoints;
+    for (size_t i = 0; i < controlPoints.size() - 1; i++) {
+        newPoints.push_back(Line::interpolate(controlPoints[i], controlPoints[i + 1], t));
+    }
+
+    return bezier(newPoints, t);
+}
+
+std::vector<Dot> bejir::DnCBezierPoint(const std::vector<Dot>& controlPoints, int numIterations) {
+    int numPoints = controlPoints.size();
+
+    while (numIterations > 0) {
+        numPoints += numPoints - 1;
+    }
+
+    std::vector<Dot> result;
+    for (int i = 0; i < numPoints; i++) {
+        float t = (float) i / (float) (numPoints - 1);
+        result.push_back(calculateBezierPoint(t, controlPoints));
+    }   
+
+    return result;
+}
 
 Dot bejir::calculateBezierPoint(double t, const std::vector<Dot> &points) {
     Dot result = Dot(0,0);

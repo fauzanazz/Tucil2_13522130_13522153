@@ -8,7 +8,6 @@
 
 #include <vector>
 #include "Dot.h"
-#include <iostream>
 
 /// Kelas List of titik
 class Line{
