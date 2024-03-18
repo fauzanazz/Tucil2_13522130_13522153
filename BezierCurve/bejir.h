@@ -37,7 +37,7 @@ public:
 
     // Bezier dengan algoritma garis tengah
     void divconNbezier(Line);
-    std::vector<Dot> bezier(const std::vector<Dot>& controlPoints, float t);
+    Dot bezier(const std::vector<Dot> controlPoints, float t);
     Line DnCBezierPoint(const std::vector<Dot>& controlPoints, int numIterations);
 
     // Brute force n control

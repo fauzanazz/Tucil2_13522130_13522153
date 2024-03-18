@@ -58,17 +58,18 @@ void bejir::divconNbezier(Line garis){
     }
 };
 
-std::vector<Dot> bejir::bezier(const std::vector<Dot>& controlPoints, float t) {
+Dot bejir::bezier(const std::vector<Dot> controlPoints, float t) {
+
     if (controlPoints.size() == 1) {
-        return controlPoints;
+        return controlPoints[0];
     }
 
-    std::vector<Dot> newPoints;
-    for (size_t i = 0; i < controlPoints.size() - 1; i++) {
-        newPoints.push_back(Line::interpolate(controlPoints[i], controlPoints[i + 1], t));
+    Line newPoints;
+    for (int i = 0; i < controlPoints.size() - 1; i++) {
+        newPoints += Line::interpolate(controlPoints[i], controlPoints[i + 1], t);
     }
 
-    return bezier(newPoints, t);
+    return bezier(newPoints.getVector(), t);
 }
 
 Line bejir::DnCBezierPoint(const std::vector<Dot>& controlPoints, int numIterations) {
@@ -83,7 +84,7 @@ Line bejir::DnCBezierPoint(const std::vector<Dot>& controlPoints, int numIterati
 
     for (int i = 0; i < numPoints; i++) {
         float t = (float) i / (float) (numPoints - 1);
-        result += calculateBezierPoint(t, controlPoints);
+        result += bezier(controlPoints,t);
     }
 
     return result;
@@ -116,6 +117,7 @@ Line bejir::calculateBezierPoint(const std::vector<Dot> &points, int iter) {
     Line bezier;
     Dot result = Dot(0,0);
     size_t n = points.size() - 1;
+
     for (int j = 0; j < pointSum; ++j){
         result = {0,0};
         double t = (double) j / ((double) pointSum - 1);

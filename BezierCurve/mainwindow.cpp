@@ -28,7 +28,7 @@ void MainWindow::addBezierCurve(Line curve, bool brute, int iteration)
 {
     garis = curve;
     isBrute = brute;
-    iter = iteration;
+    iter = iteration - 1;
 
     numPoints = garis.length();
     int tempIter = iterAnim;
