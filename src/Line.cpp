@@ -104,4 +104,8 @@ int Line::minY(){
         }
     }
     return min;
-}   
+}
+
+bool Line::isEmpty() const{
+    return dotlist.empty();
+}

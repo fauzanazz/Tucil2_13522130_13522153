@@ -58,31 +58,34 @@ void bejir::divconNbezier(Line garis){
     }
 };
 
-std::vector<Dot> bejir::bezier(const std::vector<Dot>& controlPoints, float t) {
+Dot bejir::bezier(const std::vector<Dot> controlPoints, float t) {
+
     if (controlPoints.size() == 1) {
-        return controlPoints;
+        return controlPoints[0];
     }
 
-    std::vector<Dot> newPoints;
-    for (size_t i = 0; i < controlPoints.size() - 1; i++) {
-        newPoints.push_back(Line::interpolate(controlPoints[i], controlPoints[i + 1], t));
+    Line newPoints;
+    for (int i = 0; i < controlPoints.size() - 1; i++) {
+        newPoints += Line::interpolate(controlPoints[i], controlPoints[i + 1], t);
     }
 
-    return bezier(newPoints, t);
+    return bezier(newPoints.getVector(), t);
 }
 
-std::vector<Dot> bejir::DnCBezierPoint(const std::vector<Dot>& controlPoints, int numIterations) {
+Line bejir::DnCBezierPoint(const std::vector<Dot>& controlPoints, int numIterations) {
+
+    Line result;
     int numPoints = controlPoints.size();
 
     while (numIterations > 0) {
         numPoints += numPoints - 1;
+        numIterations--;
     }
 
-    std::vector<Dot> result;
     for (int i = 0; i < numPoints; i++) {
         float t = (float) i / (float) (numPoints - 1);
-        result.push_back(calculateBezierPoint(t, controlPoints));
-    }   
+        result += bezier(controlPoints,t);
+    }
 
     return result;
 }
@@ -103,20 +106,29 @@ Dot bejir::calculateBezierPoint(double t, const std::vector<Dot> &points) {
 }
 
 Line bejir::calculateBezierPoint(const std::vector<Dot> &points, int iter) {
+
+    int pointSum = points.size();
+
+    while (iter > 0){
+        pointSum += pointSum - 1;
+        iter--;
+    }
+
     Line bezier;
     Dot result = Dot(0,0);
     size_t n = points.size() - 1;
-    for (int j = 0; j < iter; ++j){
+
+    for (int j = 0; j < pointSum; ++j){
         result = {0,0};
-        double t = (double) j / (double) iter;
+        double t = (double) j / ((double) pointSum - 1);
         for (int i = 0; i <= n; i++) {
             // Calculate the binomial coefficient
             double binCoeff = factorial(n) / (factorial(i) * factorial(n - i));
             // Calculate the Bernstein polynomial
             double bernsteinPoly = binCoeff * std::pow(t, i) * std::pow(1 - t, n - i);
             // Add the term to the result
-            result.setX(result.getX() + bernsteinPoly * points[i].getX());
-            result.setY(result.getY() + bernsteinPoly * points[i].getY());
+            result.setX(result.getX() + (bernsteinPoly * points[i].getX()));
+            result.setY(result.getY() + (bernsteinPoly * points[i].getY()));
         }
         bezier += result;
     }
