@@ -156,5 +156,5 @@ Project Link: [https://github.com/fauzanazz/Tucil2_13522130_13522153](https://gi
 [license-url]: https://github.com/fauzanazz/Tucil2_13522130_13522153/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/linkedin_username
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: img/Gambar%20Aplikasi.png
 [CPP]: https://img.shields.io/badge/-C++-blue?logo=cplusplus
