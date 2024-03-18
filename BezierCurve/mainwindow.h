@@ -27,11 +27,13 @@ public:
 
 protected:
     void paintEvent(QPaintEvent *event) override;
+    void closeEvent(QCloseEvent *event) override;
 
 private:
     Ui::Result *ui;
     bool isBrute = false;
     int iter = 0;
+    int numPoints;
 
     double t; // Parameter for the Bezier curve
     QTimer *timer; // Timer for the animation
