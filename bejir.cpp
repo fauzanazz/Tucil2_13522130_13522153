@@ -22,6 +22,48 @@ void bejir::print() {
     garisBezier.show();
 }
 
+void bejir::divconNbezier(Line garis){
+    if (garis.length() > 2 && getMaxIterasi() > 0){
+        //variables
+        int iter = getMaxIterasi();
+        Line result;
+
+        //divide per "sudut" / 3 titik, kirinya
+        Dot LP, CP, RP, LMP, RMP, CMP;
+        Dot prev_CMP;
+
+        for (int i = 0; i < garis.length() - 2; i++){
+            bejir temp(iter);
+            LP = garis[i];//left point
+            CP = garis[i+1];//center point
+            RP = garis[i+2];//right point
+            LMP = TitikTengah(LP,CP);
+            RMP = TitikTengah(CP,RP);
+            CMP = TitikTengah(LMP,RMP);
+
+            //khusus untuk garis paling kiri
+            if (i == 0) {
+                temp.AddBezierCurve(LP,LMP,CMP,1);
+                result += LP;
+            }
+            else{
+                temp.AddBezierCurve(prev_CMP,LMP,CMP,1);
+                result += prev_CMP;
+            }
+            result += temp.garisBezier;
+            // pindahkan CMP sekarang ke prevCMP untuk iterasi selanjutnya
+            prev_CMP = CMP;
+        }
+        //paling kanan
+        bejir temp(iter);
+        temp.AddBezierCurve(CMP,RMP,RP,1);
+        result += CMP;
+        result += temp.garisBezier;
+        result += RP;
+
+        this->garisBezier = result;
+    }
+};
 
 Dot bejir::calculateBezierPoint(double t, const std::vector<Dot> &points) {
     Dot result = Dot(0,0);

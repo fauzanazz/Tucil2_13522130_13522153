@@ -14,6 +14,10 @@ public:
     //Init dot dengan inputan titik x dan y
     Dot(double x, double y);
 
+    // Default Constructor
+    Dot();
+
+
     // Setter
     // Mengubah nilai x dari titik
     void setX(double setx);
