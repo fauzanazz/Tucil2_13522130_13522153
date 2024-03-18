@@ -110,6 +110,15 @@ Aplikasi yang sudah di built untuk windows sudah tersedia di folder bin. Untuk L
 1. Buka QtCreator dan pilih open project.
 2. Pilih file CMakelist pada folder src untuk membuat project.
 3. Lakukan kompilasi pada tombol start di kiri bawah.
+4. Masukkan input pada kolom yang tersedia.
+   (input harus memenuhi format (x,y) untuk titik dan integer untuk iteration)
+   (asumsi input benar, beberapa handler tidak di implementasikan jika input salah)
+
+   Contoh pengisian
+   <img src="img/Titik Pengisian.png" alt="contoh">
+5. Pilih komputasi yang akan dilakukan.
+6. Untuk yang khusus Divide and conquer 3 titik, jika dimasukkan lebih dari 3 titik hanya akan diambil 3 titik pertama.
+7. Hasil akan di tampilkan dengan animasi pembuatan.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
