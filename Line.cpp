@@ -3,15 +3,25 @@
 //
 
 #include "Line.h"
+#include <iostream>
 
 Line::Line() {
     neff = 0;
 }
 
+Dot& Line::operator[](const int& s){
+    return this->dotlist[s];
+}
+
 void Line::show() {
+    std::cout << "[";
     for (int i = 0; i < neff; i++) {
         dotlist[i].print();
+        if (i < neff-1){
+            std::cout << ",";
+        }
     };
+    std::cout << "]";
 }
 
 Line& Line::operator+=(const Dot& titik){
@@ -30,6 +40,11 @@ int Line::length() const{
     return neff;
 }
 
-Dot &Line::operator[](const int &s) {
-    return dotlist[s];
+Line& Line::operator+=(const Line& garis){
+    this->neff += garis.neff;
+    for (int i = 0; i < garis.length(); i++){
+        this->dotlist.push_back(garis.dotlist[i]);
+    }
+    return *this;
 }
+

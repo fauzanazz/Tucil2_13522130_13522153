@@ -3,13 +3,15 @@
 //
 #include "Dot.h"
 
+Dot::Dot(){}
+
 Dot::Dot(double x, double y) {
     this->x = x;
     this->y = y;
 }
 
 void Dot::print() const {
-        std::cout << "[" << x << "," << y << "]";
+        std::cout << "(" << x << "," << y << ")";
 }
 
 double Dot::getX() const {

@@ -18,15 +18,18 @@ private:
 public:
     // Initialize List of titik, list of titik akan memiliki vector titik yang kosong dan neff = 0
     Line();
+    // Memungkinkan untuk mengecek titik melalui operator []
+    Dot& operator[](const int& s);
     // Menampilkan list of titik ke layar
     void show();
-    // Menambahkan titik baru ke list of titik
-    Line& operator+=(const Dot& titik);
+    // Menambahkan titik baru ke list of titik (line kanan ditambahkan ke kiri dari end list)
+    Line& operator+=(const Dot&);
     // Mengembalikan jumblah titik dalam line
     int length() const;
+    // Line and Line plus iterator
+    Line& operator+=(const Line&);
 
-    // Memungkinkan untuk mengecek titik melalui operator []
-    Dot& operator[](const int&);
+    
 };
 
 #endif //KURVA_BEZIER_LINE_H

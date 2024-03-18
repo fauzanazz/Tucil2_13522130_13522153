@@ -12,7 +12,11 @@ private:
     double x;
     double y;
 public:
-    // Setter
+    //ctor
+    //default init
+    Dot();
+    
+    // Settez
     //Init dot dengan inputan titik x dan y
     Dot(double x, double y);
 
