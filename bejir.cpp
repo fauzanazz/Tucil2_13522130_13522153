@@ -11,6 +11,12 @@ int bejir::getMaxIterasi() const {
     return this->max_iterasi;
 }
 
+bejir& bejir::operator=(const bejir& second){
+    this->garisBezier = second.garisBezier;
+    this->max_iterasi = second.max_iterasi;
+    return *this;
+}
+
 Dot bejir::TitikTengah(Dot point1, Dot point2) {
     return {(point1.getX() + point2.getX()) / 2,(point1.getY() + point2.getY()) / 2 };
 }
@@ -38,6 +44,50 @@ Dot bejir::calculateBezierPoint(double t, const std::vector<Dot> &points) {
     }
     return result;
 }
+
+
+void bejir::divconNbezier(Line garis){
+    if (garis.length() > 2 && getMaxIterasi() > 0){
+        //variables
+        int iter = getMaxIterasi();
+        Line result;
+
+        //divide per "sudut" / 3 titik, kirinya
+        Dot LP, CP, RP, LMP, RMP, CMP;
+        Dot prev_CMP;
+
+        for (int i = 0; i < garis.length() - 2; i++){
+            bejir temp(iter);
+            LP = garis[i];//left point
+            CP = garis[i+1];//center point
+            RP = garis[i+2];//right point
+            LMP = TitikTengah(LP,CP);
+            RMP = TitikTengah(CP,RP);
+            CMP = TitikTengah(LMP,RMP);
+
+            //khusus untuk garis paling kiri
+            if (i == 0) {
+                temp.AddBezierCurve(LP,LMP,CMP,1);
+                result += LP;
+            }
+            else{
+                temp.AddBezierCurve(prev_CMP,LMP,CMP,1);
+                result += prev_CMP;
+            }
+            result += temp.garisBezier;
+            // pindahkan CMP sekarang ke prevCMP untuk iterasi selanjutnya
+            prev_CMP = CMP;
+        }
+        //paling kanan
+        bejir temp(iter);
+        temp.AddBezierCurve(CMP,RMP,RP,1);
+        result += CMP;
+        result += temp.garisBezier;
+        result += RP;
+
+        this->garisBezier = result;
+    }
+};
 
 void bejir::AddBezierCurve(Dot point1, Dot point2, Dot point3, int iterasi) {
     if (iterasi < getMaxIterasi()){

@@ -16,12 +16,18 @@ public:
     // Init class bejir
     bejir(int maxIterasi);
 
+
     // Getter
     // Mengembalikan max iterasi
     int getMaxIterasi() const;
 
+    // cctor
+    bejir& operator=(const bejir&);
+
     // Menerima dua buah titik dan mengembailkan titik tengah;
     static Dot TitikTengah(Dot point1, Dot point2);
+
+    void divconNbezier(Line);
 
     // Menambahkan titik ke kurva bezier secara rekursive
     void AddBezierCurve(Dot point1, Dot Point2, Dot Point3, int iterasi);
