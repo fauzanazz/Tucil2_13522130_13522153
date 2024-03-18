@@ -23,6 +23,7 @@ signals:
 
 private slots:
     void on_pushButton_4_clicked();
+    void solveBezier3DnC(MainWindow* window);
     void solveBezierDnC(MainWindow* window);
     void solveBezierBrute(MainWindow* window);
     void on_textEdit_textChanged();
@@ -30,6 +31,8 @@ private slots:
     void on_pushButton_clicked();
 
     void on_lineEdit_textChanged(const QString &arg1);
+
+    void on_pushButton_2_clicked();
 
 protected:
     void closeEvent(QCloseEvent *event) override;

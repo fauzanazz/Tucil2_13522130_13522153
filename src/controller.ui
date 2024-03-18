@@ -33,7 +33,14 @@
     <item>
      <widget class="QPushButton" name="pushButton_4">
       <property name="text">
-       <string>Divide N Conquer</string>
+       <string>Divide N Conquer N</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pushButton_2">
+      <property name="text">
+       <string>Divide N conquer 3</string>
       </property>
      </widget>
     </item>

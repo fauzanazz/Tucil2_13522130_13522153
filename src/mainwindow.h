@@ -21,7 +21,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    void addBezierCurve(Line curve, bool brute,int iteration);
+    void addBezierCurve(Line curve, bool brute,bool dnc3 , bool dncn, int iteration);
     void drawNextSegment();
 
 
@@ -32,6 +32,8 @@ protected:
 private:
     Ui::Result *ui;
     bool isBrute = false;
+    bool isDnC3 = false;
+    bool isDnCn = false;
     int iter = 0;
     int numPoints;
 

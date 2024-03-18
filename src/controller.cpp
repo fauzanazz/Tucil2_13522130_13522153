@@ -32,6 +32,15 @@ void Controller::on_pushButton_4_clicked()
     solveBezierDnC(panel);
 }
 
+void Controller::solveBezier3DnC(MainWindow* window)
+{
+    if(GarisControl.isEmpty()){
+        return;
+    }
+    transformDot();
+    window->addBezierCurve(GarisControl, false , true , false , iteration);
+}
+
 
 void Controller::solveBezierDnC(MainWindow* window)
 {
@@ -39,7 +48,7 @@ void Controller::solveBezierDnC(MainWindow* window)
         return;
     }
     transformDot();
-    window->addBezierCurve(GarisControl, false, iteration);
+    window->addBezierCurve(GarisControl, false, false , true , iteration);
 }
 
 void Controller::solveBezierBrute(MainWindow* window)
@@ -48,7 +57,7 @@ void Controller::solveBezierBrute(MainWindow* window)
         return;
     }
     transformDot();
-    window->addBezierCurve(GarisControl, true, iteration);
+    window->addBezierCurve(GarisControl, true,false,false, iteration);
 }
 
 void Controller::transformDot(){
@@ -115,5 +124,13 @@ void Controller::on_lineEdit_textChanged(const QString &arg1)
 {
     QString text = ui->lineEdit->text();
     iteration = text.toInt();
+}
+
+
+void Controller::on_pushButton_2_clicked()
+{
+    panel = new MainWindow();
+    panel->show();
+    solveBezierBrute(panel);
 }
 

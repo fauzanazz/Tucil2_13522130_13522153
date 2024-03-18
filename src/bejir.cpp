@@ -59,7 +59,6 @@ void bejir::divconNbezier(Line garis){
 };
 
 Dot bejir::bezier(const std::vector<Dot> controlPoints, float t) {
-
     if (controlPoints.size() == 1) {
         return controlPoints[0];
     }
@@ -73,15 +72,9 @@ Dot bejir::bezier(const std::vector<Dot> controlPoints, float t) {
 }
 
 Line bejir::DnCBezierPoint(const std::vector<Dot>& controlPoints, int numIterations) {
+    int numPoints = controlPoints.size() * std::pow(2, numIterations);
 
     Line result;
-    int numPoints = controlPoints.size();
-
-    while (numIterations > 0) {
-        numPoints += numPoints - 1;
-        numIterations--;
-    }
-
     for (int i = 0; i < numPoints; i++) {
         float t = (float) i / (float) (numPoints - 1);
         result += bezier(controlPoints,t);

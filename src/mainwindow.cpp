@@ -24,7 +24,7 @@ MainWindow::~MainWindow()
 }
 
 
-void MainWindow::addBezierCurve(Line curve, bool brute, int iteration)
+void MainWindow::addBezierCurve(Line curve, bool brute,bool dnc3 , bool dncn, int iteration)
 {
     garis = curve;
     isBrute = brute;
@@ -38,19 +38,29 @@ void MainWindow::addBezierCurve(Line curve, bool brute, int iteration)
     }
 
     exec.start();
-    qint64 timeTaken;
+    qint64 timeTaken = 0;
+
     if (isBrute){
         // Hitung waktu eksekusi
         Line solve = brutegweh.calculateBezierPoint(garis.getVector(),iter);
         solve += garis[garis.length()-1];
         brutegweh.setGarisBezier(solve);
         timeTaken = exec.elapsed();
-        solve.show();
-    } else {
+    }
+
+    if (isDnC3) {
+        std::vector<Dot> ctrl = garis.getVector();
+        brutegweh.AddBezierCurve(ctrl[0],ctrl[1],ctrl[2],iter);
+        timeTaken = exec.elapsed();
+    }
+
+    if (isDnCn) {
         Line solve = brutegweh.DnCBezierPoint(garis.getVector(),iter);
         brutegweh.setGarisBezier(solve);
         timeTaken = exec.elapsed();
     }
+
+
     QString timeString = QString::number(timeTaken);
     // Set the window title to display the time taken in QT
     setWindowTitle("Time taken: " + timeString + " miliseconds");
