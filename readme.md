@@ -119,6 +119,7 @@ Aplikasi yang sudah di built untuk windows sudah tersedia di folder bin. Untuk L
 5. Pilih komputasi yang akan dilakukan.
 6. Untuk yang khusus Divide and conquer 3 titik, jika dimasukkan lebih dari 3 titik hanya akan diambil 3 titik pertama.
 7. Hasil akan di tampilkan dengan animasi pembuatan.
+8. Waktu kompilasi akan ditampilkan di titleBar
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
